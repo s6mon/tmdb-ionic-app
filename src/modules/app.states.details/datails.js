@@ -21,7 +21,7 @@
         }
       },
       resolve: {
-        movieData: ['statesService', movieDataResolver]
+        movieData: ['$stateParams', 'statesService', movieDataResolver]
       }
     });
   }

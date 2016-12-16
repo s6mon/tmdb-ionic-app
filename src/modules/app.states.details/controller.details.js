@@ -8,9 +8,7 @@
     var controller = this;
 
     $scope.movieData = movieData;
-    }
-
-
+  }
 
   module.controller('detailsController', [
     '$scope',

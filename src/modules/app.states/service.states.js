@@ -4,21 +4,43 @@
 (function (module) {
   'use strict';
 
-  function StatesService(httpService, i18nService, $q) {
+  function StatesService(
+    $q,
+    httpService,
+    i18nService,
+    API_IMAGES_URL,
+    API_KEY
+  ) {
+
     var service = this;
 
-
     service.search = function (query) {
-      console.log(query);
-      return $q.resolve([
-        { title: 'moi' },
-        { title: 'moi2' }])
+      return httpService.get('/3/search/movie', {
+        language: i18nService.getLocale(),
+        api_key: API_KEY,
+        query: query
+      }).then(function (data) {
+        return data.results;
+      });
     };
 
+    service.getMovie = function (id) {
+      return httpService.get('/3/momvie/' + id, {
+        language: i18nService.getLocale(),
+        api_hey: API_KEY
+      });
+    };
 
-    service.getMovie = function (id){
-      return $q.resolve({ title: "'Moi", id: id });
-    }
+    service.discoverMovie = function () {
+      return httpService.get('/3/discover/movie', {
+        'release_date.lte': moment().add(3, 'months').format('YYY-MM-DD'),
+        language: i18nService.getLocale(),
+        api_key: API_KEY
+      }).then(function (data) {
+        return _.sample(data.results) || $q.reject();
+      });
+    };
+
     /**
      * Resolve states data.
      * @return {Promise} Passing an object.
@@ -32,9 +54,11 @@
   }
 
   module.service('statesService', [
+    '$q',
     'httpService',
     'i18nService',
-    '$q',
+    'API_IMAGES_URL',
+    'API_KEY',
     StatesService
 
   ]);

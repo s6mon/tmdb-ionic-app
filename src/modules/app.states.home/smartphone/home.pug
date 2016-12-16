@@ -11,10 +11,10 @@ ion-view.view-home(view-title="Home")
       on-tap="homeController.search()") OK
   ion-content.has-subheader
     ion-list
-      ion-item(ng-if="search.results.lenght < 1")
+      ion-item(ng-if="search.results.length < 1")
         | No results
       ion-item.item-icon-right(
-        ng-repeat="result in search.results",
+        ng-repeat="result in search.results | orderBy:'-release_date'",
         ui-state="STATE_DETAILS")
         | {{ results.title }}
         i.icon.ion-ios-arrow-forward
