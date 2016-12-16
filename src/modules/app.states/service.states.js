@@ -25,9 +25,9 @@
     };
 
     service.getMovie = function (id) {
-      return httpService.get('/3/momvie/' + id, {
+      return httpService.get('/3/movie/' + id, {
         language: i18nService.getLocale(),
-        api_hey: API_KEY
+        api_key: API_KEY
       });
     };
 

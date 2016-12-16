@@ -4,7 +4,7 @@ ion-view.view-home(view-title="Home")
       i.icon.ion-ios-search.placeholder-icon
       input(
         type="search",
-        ng-model="Search.query"
+        ng-model="search.query"
         placeholder="Search")
     button.button.button-clear.button-positive(
       ng-disable="search.query.length < 3",
@@ -15,6 +15,7 @@ ion-view.view-home(view-title="Home")
         | No results
       ion-item.item-icon-right(
         ng-repeat="result in search.results | orderBy:'-release_date'",
-        ui-state="STATE_DETAILS")
-        | {{ results.title }}
+        ui-state="STATE_DETAILS",
+        ui-state-params="{id: result.id}")
+        | {{ result.title }}
         i.icon.ion-ios-arrow-forward

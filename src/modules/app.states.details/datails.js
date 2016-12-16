@@ -14,7 +14,7 @@
   function config($stateProvider) {
     $stateProvider.state(STATE_DETAILS, {
       data: { module: module, navBar: true },
-      url: '/details',
+      url: '/details/:id',
       views: {
         'content-smartphone': {
           controller: 'detailsController as detailsController'
